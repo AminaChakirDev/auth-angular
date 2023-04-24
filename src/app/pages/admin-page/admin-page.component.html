@@ -1,0 +1,14 @@
+<p>Bienvenue sur la page admin</p>
+<p>
+  Cette page ne peut être accessible que par un utilisateur possédant un rôle
+  ROLE_ADMIN
+</p>
+<p>
+  Le lien vers cette page depuis la barre de navigation n'apparait que pour les
+  utilisateurs possédant un ROLE_ADMIN (voir ngIf dans app.component.html)
+</p>
+<p>
+  Si l'utilisateur ecrit directement l'url /admin dans la barre de navigation
+  (ne jamais faire confiance à un utilisateur ;-) ), l'affichage ne lui est pas
+  autorisé grâce aux guards (voir app.routing + authGuard)
+</p>
