@@ -15,9 +15,9 @@ export class AuthService {
     return this.http.post<any>(AUTH_API + '/signup', signupForm);
   }
 
-  login(email: string, password: string) {
+  login(username: string, password: string) {
     return this.http.post<any>(AUTH_API + '/signin', {
-      username: email,
+      email: username,
       password: password,
     });
   }
@@ -25,7 +25,7 @@ export class AuthService {
   public setSession(userInfo: any) {
     const jwt: any = jwt_decode(userInfo.accessToken);
 
-    const expiresAt = new Date(jwt.exp * 1000).toLocaleString();
+    const expiresAt = new Date(jwt.exp * 1000);
 
     localStorage.setItem(
       'USER_INFOS',
@@ -57,7 +57,7 @@ export class AuthService {
     const userInfoFromLocalStorage = localStorage.getItem('USER_INFOS');
     if (userInfoFromLocalStorage) {
       let userInfo = JSON.parse(userInfoFromLocalStorage);
-      if (userInfo.expires_at.toLocaleString() > new Date().toLocaleString()) {
+      if (new Date(userInfo.expires_at).getTime() > new Date().getTime()) {
         return true;
       } else {
         this.logout();
